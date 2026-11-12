@@ -149,11 +149,22 @@ jobs:
           open(p, 'w').write(g)
           PY
 
-      - name: Build signed Release APK
+      - name: Build signed Release APK (with network retry)
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleRelease
+          sed -i 's/-all\.zip/-bin.zip/g' gradle/wrapper/gradle-wrapper.properties || true
+          export GRADLE_OPTS="-Dhttps.protocols=TLSv1.2,TLSv1.3 -Dhttp.keepAlive=false"
+          for attempt in 1 2 3; do
+            echo "Gradle build attempt $attempt..."
+            if ./gradlew assembleRelease --no-daemon; then
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              exit 1
+            fi
+            sleep 5
+          done
 
       - name: Rename & verify APK signature
         run: |
