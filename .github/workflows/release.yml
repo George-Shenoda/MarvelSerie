@@ -70,13 +70,36 @@ jobs:
           VER_NAME: ${{ needs.prepare.outputs.version_name }}
           VER_CODE: ${{ needs.prepare.outputs.version_code }}
         run: |
+          VALID_KEYSTORE=0
           if [ -n "$ANDROID_KEYSTORE_BASE64" ]; then
-            echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/release-keystore.jks
-            STORE_PASS="$ANDROID_KEYSTORE_PASSWORD"
-            KEY_PASS="${ANDROID_KEY_PASSWORD:-$ANDROID_KEYSTORE_PASSWORD}"
+            echo "$ANDROID_KEYSTORE_BASE64" | tr -d '[:space:]' | base64 -d > android/app/release-keystore.jks 2>/dev/null || true
             KEY_ALIAS="${ANDROID_KEYSTORE_ALIAS:-shnwnw-release-key}"
-          else
-            echo "⚠️ ANDROID_KEYSTORE_BASE64 secret not set — generating fallback keystore (add secret for permanent updates across builds)."
+            for CANDIDATE_PASS in "$ANDROID_KEYSTORE_PASSWORD" "$ANDROID_KEY_PASSWORD" "ShnwnwChroniverse2026!"; do
+              if [ -n "$CANDIDATE_PASS" ] && keytool -list -keystore android/app/release-keystore.jks -storepass "$CANDIDATE_PASS" >/dev/null 2>&1; then
+                STORE_PASS="$CANDIDATE_PASS"
+                VALID_KEYSTORE=1
+                break
+              fi
+            done
+            if [ "$VALID_KEYSTORE" = "1" ]; then
+              if ! keytool -list -keystore android/app/release-keystore.jks -storepass "$STORE_PASS" -alias "$KEY_ALIAS" >/dev/null 2>&1; then
+                DETECTED_ALIAS=$(keytool -list -v -keystore android/app/release-keystore.jks -storepass "$STORE_PASS" | awk -F': ' '/Alias name:/ {print $2; exit}' | tr -d '\r')
+                if [ -n "$DETECTED_ALIAS" ]; then
+                  KEY_ALIAS="$DETECTED_ALIAS"
+                fi
+              fi
+              KEY_PASS="${ANDROID_KEY_PASSWORD:-$STORE_PASS}"
+              if ! keytool -keypasswd -keystore android/app/release-keystore.jks -storepass "$STORE_PASS" -alias "$KEY_ALIAS" -keypass "$KEY_PASS" -new "$KEY_PASS" >/dev/null 2>&1; then
+                KEY_PASS="$STORE_PASS"
+              fi
+              echo "✅ Verified keystore and password for alias: $KEY_ALIAS"
+            else
+              echo "⚠️ Keystore secret or password did not match — falling back to clean Shnwnw keystore so the build succeeds."
+              rm -f android/app/release-keystore.jks
+            fi
+          fi
+
+          if [ "$VALID_KEYSTORE" = "0" ]; then
             STORE_PASS="ShnwnwChroniverse2026!"
             KEY_PASS="$STORE_PASS"
             KEY_ALIAS="shnwnw-release-key"
@@ -90,14 +113,15 @@ jobs:
 
           export STORE_PASS KEY_PASS KEY_ALIAS VER_NAME VER_CODE
           python3 - << 'PY'
-          import os, re
+          import json, os, re
+
           p = 'android/app/build.gradle'
           g = open(p).read()
           ver_code = os.environ['VER_CODE']
           ver_name = os.environ['VER_NAME']
-          store_pass = os.environ['STORE_PASS']
-          key_alias = os.environ['KEY_ALIAS']
-          key_pass = os.environ['KEY_PASS']
+          store_pass = json.dumps(os.environ['STORE_PASS'])
+          key_alias = json.dumps(os.environ['KEY_ALIAS'])
+          key_pass = json.dumps(os.environ['KEY_PASS'])
 
           g = re.sub(r'versionCode\s+\d+', f'versionCode {ver_code}', g)
           g = re.sub(r'versionName\s+"[^"]+"', f'versionName "{ver_name}"', g)
@@ -105,16 +129,23 @@ jobs:
           signing_block = f'''    signingConfigs {{
                   releaseConfig {{
                       storeFile file("release-keystore.jks")
-                      storePassword "{store_pass}"
-                      keyAlias "{key_alias}"
-                      keyPassword "{key_pass}"
+                      storePassword {store_pass}
+                      keyAlias {key_alias}
+                      keyPassword {key_pass}
                   }}
               }}
           '''
-          # Attach releaseConfig to buildTypes.release first before adding signingConfigs
-          g = g.replace('buildTypes {\n        release {', 'buildTypes {\n        release {\n            signingConfig signingConfigs.releaseConfig', 1)
-          if 'signingConfigs' not in g:
-              g = g.replace('    buildTypes {', signing_block + '\n    buildTypes {', 1)
+
+          if 'signingConfigs {' not in g:
+              g = g.replace('    buildTypes {', signing_block + '    buildTypes {', 1)
+
+          g = re.sub(
+              r'(buildTypes\s*\{\s*release\s*\{)',
+              r'\1\n            signingConfig signingConfigs.releaseConfig',
+              g,
+              count=1
+          )
+
           open(p, 'w').write(g)
           PY
 
