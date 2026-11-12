@@ -88,25 +88,33 @@ jobs:
               -dname "CN=Shnwnw, OU=Mobile, O=Shnwnw, L=Cairo, ST=Cairo, C=EG"
           fi
 
-          python3 - << PY
-          import re
+          export STORE_PASS KEY_PASS KEY_ALIAS VER_NAME VER_CODE
+          python3 - << 'PY'
+          import os, re
           p = 'android/app/build.gradle'
           g = open(p).read()
-          g = re.sub(r'versionCode\s+\d+', 'versionCode $VER_CODE', g)
-          g = re.sub(r'versionName\s+"[^"]+"', 'versionName "$VER_NAME"', g)
-          signing_block = '''
-              signingConfigs {
-                  release {
+          ver_code = os.environ['VER_CODE']
+          ver_name = os.environ['VER_NAME']
+          store_pass = os.environ['STORE_PASS']
+          key_alias = os.environ['KEY_ALIAS']
+          key_pass = os.environ['KEY_PASS']
+
+          g = re.sub(r'versionCode\s+\d+', f'versionCode {ver_code}', g)
+          g = re.sub(r'versionName\s+"[^"]+"', f'versionName "{ver_name}"', g)
+
+          signing_block = f'''    signingConfigs {{
+                  releaseConfig {{
                       storeFile file("release-keystore.jks")
-                      storePassword "${STORE_PASS}"
-                      keyAlias "${KEY_ALIAS}"
-                      keyPassword "${KEY_PASS}"
-                  }
-              }
+                      storePassword "{store_pass}"
+                      keyAlias "{key_alias}"
+                      keyPassword "{key_pass}"
+                  }}
+              }}
           '''
+          # Attach releaseConfig to buildTypes.release first before adding signingConfigs
+          g = g.replace('buildTypes {\n        release {', 'buildTypes {\n        release {\n            signingConfig signingConfigs.releaseConfig', 1)
           if 'signingConfigs' not in g:
-              g = g.replace('buildTypes {', signing_block + '\n    buildTypes {', 1)
-          g = g.replace('release {', 'release {\n            signingConfig signingConfigs.release', 1)
+              g = g.replace('    buildTypes {', signing_block + '\n    buildTypes {', 1)
           open(p, 'w').write(g)
           PY
 
@@ -153,7 +161,12 @@ jobs:
           VER_CODE: ${{ needs.prepare.outputs.version_code }}
         run: |
           mkdir -p dist-ios
-          xcodebuild -project ios/App/App.xcodeproj \
+          if [ -d "ios/App/App.xcworkspace" ]; then
+            XCODE_TARGET=(-workspace ios/App/App.xcworkspace)
+          else
+            XCODE_TARGET=(-project ios/App/App.xcodeproj)
+          fi
+          xcodebuild "${XCODE_TARGET[@]}" \
             -scheme App \
             -configuration Release \
             -sdk iphoneos \
