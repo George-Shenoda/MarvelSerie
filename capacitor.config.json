@@ -1,0 +1,12 @@
+{
+  "appId": "com.shnwnw.marvelchroniverse",
+  "appName": "Marvel Chroniverse",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true
+  },
+  "ios": {
+    "contentInset": "automatic"
+  }
+}

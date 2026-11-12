@@ -1,0 +1,20 @@
+{
+  "name": "marvel-chroniverse-mobile",
+  "version": "1.0.0",
+  "description": "Marvel Chroniverse — All-Universe Chronological Watchlist & Auto-Sync Mobile App",
+  "author": "Shnwnw <georgeshenoda86@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "cap:sync": "npx cap sync",
+    "assets:generate": "npx @capacitor/assets generate --iconBackgroundColor '#080A10' --splashBackgroundColor '#080A10'"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.1.2"
+  }
+}
