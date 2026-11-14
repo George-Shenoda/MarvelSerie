@@ -56,6 +56,7 @@ jobs:
 
       - name: Install dependencies & generate Android project
         run: |
+          sed -i "s|__GITHUB_REPO_PLACEHOLDER__|${{ github.repository }}|g" www/index.html || true
           npm install
           npx cap add android
           npx @capacitor/assets generate --android --iconBackgroundColor '#080A10' --splashBackgroundColor '#080A10' || true
@@ -192,6 +193,7 @@ jobs:
 
       - name: Install dependencies & generate iOS project
         run: |
+          sed -i '' "s|__GITHUB_REPO_PLACEHOLDER__|${{ github.repository }}|g" www/index.html || true
           npm install
           npx cap add ios
           npx @capacitor/assets generate --ios --iconBackgroundColor '#080A10' --splashBackgroundColor '#080A10' || true
