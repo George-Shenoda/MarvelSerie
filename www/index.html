@@ -93,7 +93,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen tva-grid-bg pb-28 selection:bg-marvel-red selection:text-white">
+<body class="min-h-screen tva-grid-bg pb-24 selection:bg-marvel-red selection:text-white">
 
   <!-- TOP STICKY MOBILE APP SHELL HEADER -->
   <header class="sticky top-0 z-40 backdrop-blur-xl bg-marvel-obsidian/90 border-b border-marvel-border">
@@ -103,22 +103,17 @@
         <div class="min-w-0">
           <div class="flex items-center gap-1.5">
             <h1 class="font-display text-lg sm:text-xl tracking-wider text-white truncate">CHRONIVERSE TRACKER</h1>
-            <span id="offlineStatusBadge" class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shrink-0">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              90% OFFLINE • 10% SYNC
-            </span>
           </div>
-          <p class="text-[11px] text-slate-400 truncate">All Canon Universes • MCU • Sony • Fox • Netflix</p>
+          <p class="text-[11px] text-slate-400 truncate">MCU • Fox X-Men • Sony Spider-Verse • Defenders</p>
         </div>
       </div>
 
       <div class="flex items-center gap-1.5 shrink-0">
-        <button id="headerSyncBtn" type="button" class="px-2.5 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 active:scale-95 text-amber-300 border border-amber-500/30 text-xs font-semibold flex items-center gap-1.5 transition" title="Check & auto-place newly released Marvel titles">
+        <button id="headerSyncBtn" type="button" class="px-2.5 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 active:scale-95 text-amber-300 border border-amber-500/30 text-xs font-semibold flex items-center gap-1.5 transition" title="Sync latest timeline updates">
           <svg class="w-3.5 h-3.5" id="syncIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
           </svg>
-          <span class="hidden sm:inline">Auto-Sync</span>
-          <span id="newReleaseCountPill" class="px-1.5 py-0.2 rounded-full bg-marvel-red text-white text-[10px] font-bold">0</span>
+          <span>Sync</span>
         </button>
 
         <button id="headerResetBtn" type="button" class="px-2.5 py-1.5 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 active:scale-95 text-rose-300 border border-rose-500/30 text-xs font-semibold flex items-center gap-1 transition" title="Reset Watchlist to 0% to rewatch from the beginning">
@@ -134,7 +129,7 @@
   <!-- MAIN CONTAINER -->
   <main class="max-w-3xl mx-auto px-3.5 pt-3 space-y-4">
 
-    <!-- HERO BANNER WITH GENERATED MULTIVERSE TIMELINE ART & PROGRESS HUD -->
+    <!-- HERO BANNER WITH MULTIVERSE TIMELINE ART & PROGRESS HUD -->
     <section class="relative rounded-2xl overflow-hidden border border-marvel-border shadow-2xl bg-marvel-panel">
       <div class="relative h-44 sm:h-48 w-full overflow-hidden">
         <img
@@ -146,10 +141,10 @@
         <div class="absolute inset-0 p-4 flex flex-col justify-between">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-black/70 text-amber-300 border border-amber-500/40 backdrop-blur-md">
-              <span>⚡ Sacred Timeline + Multiverse Canon</span>
+              <span>⚡ Sacred Timeline + Multiverse Order</span>
             </span>
             <span id="lastSyncTimestamp" class="text-[11px] font-mono text-slate-300 bg-black/60 px-2.5 py-1 rounded-full border border-white/10">
-              Offline DB v2026.11 • Synced
+              Auto-Sync Ready
             </span>
           </div>
 
@@ -205,22 +200,22 @@
       </div>
     </section>
 
-    <!-- PAGE 1: MAIN CANON CHRONOLOGICAL TIMELINE -->
+    <!-- PAGE 1: MAIN CHRONOLOGICAL TIMELINE -->
     <section id="viewMainTimeline" class="space-y-4">
 
-      <!-- NEWLY RELEASED RADAR ALERT (SOLVES PREQUEL / EARLY TIMELINE VISIBILITY) -->
+      <!-- NEWLY RELEASED (UNWATCHED THIS YEAR) RADAR -->
       <div id="newReleasesRadarBox" class="rounded-2xl bg-gradient-to-r from-amber-500/15 via-marvel-red/15 to-marvel-panel border border-amber-500/40 p-3.5 shadow-lg">
         <div class="flex items-start justify-between gap-2">
           <div class="flex items-start gap-2.5">
             <span class="px-2 py-0.5 rounded bg-amber-500 text-black font-mono text-[10px] font-extrabold uppercase tracking-wider shrink-0 mt-0.5">
-              NEW RELEASE RADAR
+              NEW RELEASES
             </span>
             <div>
               <h3 class="text-xs sm:text-sm font-bold text-amber-200">
-                Newly Released Titles Placed Across the Chronology
+                Unwatched Releases From This Year
               </h3>
               <p class="text-[11px] text-slate-300 mt-0.5">
-                Prequels & period movies (like <span class="text-amber-300 font-semibold">Eyes of Wakanda</span> in 1260 BC or <span class="text-amber-300 font-semibold">The Fantastic Four: First Steps</span> in 1964) are inserted near the very start of the timeline—tap any chip below to jump straight to its chronological place so you never miss it!
+                Shows this year's newly released movies &amp; series that you haven't watched yet—tap any title below to jump straight to its chronological slot.
               </p>
             </div>
           </div>
@@ -244,7 +239,7 @@
             <input
               id="timelineSearchInput"
               type="text"
-              placeholder="Search movie, series, universe, or year (e.g. Spider-Man, Fox, 1964, Netflix)..."
+              placeholder="Search movie, series, universe, or year (e.g. X-Men, Spider-Man, Fox, Netflix)..."
               class="w-full pl-9 pr-8 py-2 rounded-xl bg-marvel-obsidian border border-marvel-border text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-marvel-red"
             />
             <button id="clearSearchBtn" type="button" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-bold px-1">
@@ -257,7 +252,7 @@
             <option value="PENDING">📋 To Watch (Remaining)</option>
             <option value="DONE">✅ Marked as Done</option>
             <option value="SKIPPED">⏭ Marked as Skipped</option>
-            <option value="NEW">🔥 Newly Released Only</option>
+            <option value="NEW">🔥 Unwatched New Releases</option>
           </select>
 
           <select id="typeFilterSelect" aria-label="Filter by Media Type" class="px-3 py-2 rounded-xl bg-marvel-obsidian border border-marvel-border text-xs font-semibold text-slate-200 focus:outline-none focus:border-marvel-red">
@@ -286,7 +281,7 @@
             🕷️ Sony & Spider-Verse
           </button>
           <button type="button" data-universe="LEGACY" class="uni-pill px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 bg-marvel-obsidian text-slate-300 border border-marvel-border hover:border-slate-500 transition">
-            ⚔️ Legacy Multiverse (Void)
+            ⚔️ Legacy Multiverse
           </button>
         </div>
 
@@ -294,7 +289,7 @@
           <span id="visibleCountReadout">Showing 0 titles in chronological order</span>
           <div class="flex items-center gap-2">
             <button id="jumpToFirstNewBtn" type="button" class="text-amber-400 hover:underline font-semibold">
-              ⚡ Jump to Earliest New Release
+              ⚡ Jump to New Release
             </button>
             <span>•</span>
             <button id="jumpToNextUnwatchedBtn" type="button" class="text-emerald-400 hover:underline font-semibold">
@@ -316,13 +311,13 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40 font-mono text-[10px] font-bold uppercase tracking-wider">
-              PAGE 2 • ALTERNATE BRANCHES & LEGACY ARCHIVE
+              ALTERNATE BRANCHES &amp; LEGACY ARCHIVE
             </span>
             <h2 class="font-display text-2xl sm:text-3xl tracking-wide text-white mt-1">
-              NON-CANON & ALTERNATE UNIVERSE VAULT
+              NON-CANON MOVIES &amp; SERIES
             </h2>
             <p class="text-xs text-slate-300 mt-0.5">
-              Every non-canon or alternate-branch Marvel movie and series is ordered chronologically below, showing <strong class="text-purple-300">where its exact chronological place is</strong> relative to the main canon timeline. If any title is later confirmed as canon, tap <strong class="text-emerald-300">"+ Confirm Canon"</strong> to move it into your main canon watchlist permanently—or toggle the button below to show all non-canon titles inside the main page!
+              Every non-canon or alternate-universe Marvel movie and series is ordered chronologically below, showing <strong class="text-purple-300">its exact chronological position</strong> relative to the main timeline. Want to watch a specific title during your marathon anyway? Tap <strong class="text-emerald-300">"+ Add to Main"</strong> to include it in your Main Timeline—or toggle the button below to show all of them at once.
             </p>
           </div>
 
@@ -340,7 +335,7 @@
           />
           <div class="flex items-center gap-2 text-xs text-purple-200 font-mono px-2">
             <span id="nonCanonCountLabel">0 Non-Canon Titles</span> •
-            <span id="promotedCanonCountLabel" class="text-emerald-300">0 Promoted to Canon</span>
+            <span id="promotedCanonCountLabel" class="text-emerald-300">0 Added to Main</span>
           </div>
         </div>
       </div>
@@ -351,143 +346,9 @@
       </div>
     </section>
 
-    <!-- PAGE 3: 90% OFFLINE / 10% LIVE AUTO-UPDATE & RELEASE ENGINE -->
-    <section id="viewSyncEnginePage" class="hidden space-y-4">
-      <div class="rounded-2xl bg-marvel-panel border border-marvel-border p-4 space-y-4 shadow-xl">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[10px] font-bold uppercase tracking-wider">
-              HYBRID ARCHITECTURE • 90% OFFLINE / 10% LIVE SYNC
-            </span>
-            <h2 class="font-display text-2xl sm:text-3xl tracking-wide text-white mt-1">
-              AUTOMATIC RELEASE & CANON UPDATE ENGINE
-            </h2>
-          </div>
-          <button id="runLiveSyncNowBtn" type="button" class="px-4 py-2 rounded-xl bg-marvel-red hover:bg-marvel-darkRed text-white font-bold text-xs flex items-center gap-2 shadow-lg transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-            </svg>
-            <span>Check & Auto-Update Releases Now</span>
-          </button>
-        </div>
-
-        <!-- 90% OFFLINE / 10% ONLINE ARCHITECTURE BREAKDOWN -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div class="p-3.5 rounded-xl bg-marvel-obsidian border border-emerald-500/30 space-y-1.5">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono font-bold text-emerald-400">90% OFFLINE CORE ENGINE</span>
-              <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-[10px]">ACTIVE LOCAL STORAGE</span>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              All chronological ordering rules, multiverse links (MCU, Netflix, Fox, Sony), Watch/Skip todo states, and Canon promotions are stored directly on your device. Works 100% without internet access.
-            </p>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-marvel-obsidian border border-amber-500/30 space-y-1.5">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono font-bold text-amber-400">10% LIVE DELTA UPDATER</span>
-              <span id="syncEngineStatusText" class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 font-mono text-[10px]">READY TO SYNC</span>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Automatically checks release dates against today's date (<span id="currentDateReadout" class="font-mono text-white">2026-11-12</span>) and queries live Wikipedia REST metadata when online to insert newly released titles into their exact chronological era with a <span class="text-amber-300 font-semibold">NEW RELEASE</span> alert badge.
-            </p>
-          </div>
-        </div>
-
-                <!-- GITHUB CLOUD OTA LIVE SYNC SOURCE -->
-        <div class="p-3.5 rounded-xl bg-marvel-obsidian border border-cyan-500/35 space-y-2">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="text-xs font-mono font-bold text-cyan-400">☁️ GITHUB OVER-THE-AIR (OTA) DATA SYNC</span>
-            <span id="otaCatalogVersionBadge" class="px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-mono text-[10px]">v2.0.0-causal-chronology</span>
-          </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Whenever you push changes to <code class="text-amber-300 font-mono">www/catalog.json</code> or <code class="text-amber-300 font-mono">www/index.html</code> in your GitHub repository, tapping <strong>Sync</strong> (or opening the app) updates the timeline order &amp; data automatically without downloading a new APK.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-2 pt-1">
-            <input
-              id="githubRepoSlugInput"
-              type="text"
-              placeholder="GitHub owner/repo (e.g. Shnwnw/MarvelSerie)"
-              class="flex-1 px-3 py-2 rounded-xl bg-marvel-panel border border-marvel-border text-xs font-mono text-white focus:border-cyan-400"
-            />
-            <button
-              id="saveGithubRepoBtn"
-              type="button"
-              class="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold shrink-0 transition"
-            >
-              Save Repo &amp; Sync Now
-            </button>
-          </div>
-        </div>
-
-        <!-- UPCOMING SCHEDULE QUEUE (AUTO-UNLOCKS ON RELEASE OR TEST SIMULATION) -->
-        <div class="space-y-2.5 pt-2 border-t border-marvel-border">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-sm font-bold text-white">Upcoming Confirmed Marvel Releases Queue (2026–2028)</h3>
-              <p class="text-[11px] text-slate-400">
-                When a movie or series reaches its release date, the app automatically places it into its exact chronological slot and flags it as <strong class="text-amber-300">NEW RELEASE</strong>. Tap <strong class="text-amber-300">"Simulate Release"</strong> on any upcoming title below to watch it auto-insert right now!
-              </p>
-            </div>
-          </div>
-
-          <div id="upcomingQueueList" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            <!-- Populated dynamically by JS -->
-          </div>
-        </div>
-
-        <!-- ADD / SIMULATE NEW RELEASE OR RETROACTIVE PREQUEL FORM -->
-        <div class="p-3.5 rounded-xl bg-marvel-obsidian border border-marvel-border space-y-3">
-          <div>
-            <h3 class="text-sm font-bold text-amber-300">Add / Simulate a Newly Released Movie or Retroactive Prequel</h3>
-            <p class="text-[11px] text-slate-400">
-              Test how the app handles a brand-new release that takes place <em>before the first movie ever</em> (e.g., set in 1000 BC or 1940) or anywhere in the timeline—it will automatically calculate its chronological rank, insert it, and alert you in the New Release Radar!
-            </p>
-          </div>
-
-          <form id="customReleaseForm" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            <input
-              id="customTitleInput"
-              type="text"
-              required
-              placeholder="Title (e.g. Blade: Origins or X-Men Reboot)"
-              class="px-3 py-2 rounded-lg bg-marvel-panel border border-marvel-border text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
-            />
-            <div class="flex gap-2">
-              <input
-                id="customChronoYearInput"
-                type="number"
-                required
-                placeholder="In-Universe Year (e.g. 1939 or 2028)"
-                value="1939"
-                class="w-full px-3 py-2 rounded-lg bg-marvel-panel border border-marvel-border text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
-              />
-              <select id="customTypeInput" class="px-2.5 py-2 rounded-lg bg-marvel-panel border border-marvel-border text-xs text-slate-200">
-                <option value="Movie">Movie</option>
-                <option value="Series">Series</option>
-                <option value="Special">Special</option>
-              </select>
-            </div>
-            <div class="flex gap-2">
-              <select id="customUniverseInput" class="flex-1 px-2.5 py-2 rounded-lg bg-marvel-panel border border-marvel-border text-xs text-slate-200">
-                <option value="MCU">MCU Sacred</option>
-                <option value="SONY">Sony / SSU</option>
-                <option value="FOX">Fox X-Men</option>
-                <option value="NETFLIX">Netflix Saga</option>
-                <option value="LEGACY">Legacy Canon</option>
-              </select>
-              <button type="submit" class="px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs shrink-0 transition">
-                + Release & Place
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- RESET CONFIRMATION MODAL (NO NATIVE CONFIRM()) -->
+  <!-- RESET CONFIRMATION MODAL -->
   <div id="resetModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
     <div class="w-full max-w-md rounded-2xl bg-marvel-panel border border-rose-500/40 p-5 space-y-4 shadow-2xl">
       <div class="flex items-center gap-3">
@@ -500,11 +361,11 @@
         </div>
       </div>
       <p class="text-xs text-slate-300 leading-relaxed">
-        This will clear all <strong class="text-emerald-400">Done (Watched)</strong> and <strong class="text-amber-400">Skipped</strong> marks across all movies and series so you can rewatch from <strong class="text-white">#1</strong>. You can also optionally reset custom canon promotions and simulated releases.
+        This will clear all <strong class="text-emerald-400">Done (Watched)</strong> and <strong class="text-amber-400">Skipped</strong> marks across all movies and series so you can rewatch from <strong class="text-white">#1</strong>.
       </p>
       <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer select-none">
         <input id="resetIncludeCustomCheckbox" type="checkbox" class="rounded border-slate-600 text-marvel-red focus:ring-0" />
-        <span>Also reset custom Canon promotions & simulated releases</span>
+        <span>Also clear non-canon items manually added to Main</span>
       </label>
       <div class="flex items-center justify-end gap-2 pt-2 border-t border-marvel-border">
         <button id="cancelResetModalBtn" type="button" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition">
@@ -523,43 +384,31 @@
     <span id="toastMessage" class="flex-1 truncate">Timeline updated!</span>
   </div>
 
-  <!-- MOBILE APP BOTTOM NAVIGATION BAR -->
+  <!-- MOBILE APP BOTTOM NAVIGATION BAR (2 PRODUCTION TABS ONLY) -->
   <nav class="fixed bottom-0 inset-x-0 z-40 backdrop-blur-xl bg-marvel-obsidian/95 border-t border-marvel-border">
-    <div class="max-w-3xl mx-auto px-3 py-1.5 grid grid-cols-3 gap-2">
+    <div class="max-w-3xl mx-auto px-3 py-1.5 grid grid-cols-2 gap-2.5">
       <button type="button" id="navTabMain" data-tab="MAIN" class="bottom-nav-btn py-2 px-3 rounded-xl flex flex-col items-center justify-center gap-0.5 bg-marvel-red/20 text-white border border-marvel-red/50 transition">
         <div class="flex items-center gap-1.5">
           <span class="text-sm">🛡️</span>
-          <span class="text-xs font-bold">Canon Timeline</span>
+          <span class="text-xs font-bold">Main Timeline</span>
         </div>
-        <span id="navCanonSubtitle" class="text-[10px] font-mono text-amber-300">Chronological To-Do</span>
+        <span id="navCanonSubtitle" class="text-[10px] font-mono text-amber-300">Canon Watchlist</span>
       </button>
 
       <button type="button" id="navTabNonCanon" data-tab="NONCANON" class="bottom-nav-btn py-2 px-3 rounded-xl flex flex-col items-center justify-center gap-0.5 bg-transparent text-slate-400 border border-transparent hover:text-slate-200 transition">
         <div class="flex items-center gap-1.5">
           <span class="text-sm">🌀</span>
-          <span class="text-xs font-bold">Non-Canon Page</span>
+          <span class="text-xs font-bold">Non-Canon Vault</span>
         </div>
-        <span id="navNonCanonSubtitle" class="text-[10px] font-mono text-slate-400">Legacy + Confirm Canon</span>
-      </button>
-
-      <button type="button" id="navTabSync" data-tab="SYNC" class="bottom-nav-btn py-2 px-3 rounded-xl flex flex-col items-center justify-center gap-0.5 bg-transparent text-slate-400 border border-transparent hover:text-slate-200 transition">
-        <div class="flex items-center gap-1.5">
-          <span class="text-sm">📡</span>
-          <span class="text-xs font-bold">10% Auto-Sync</span>
-        </div>
-        <span class="text-[10px] font-mono text-emerald-400">90% Offline Ready</span>
+        <span id="navNonCanonSubtitle" class="text-[10px] font-mono text-slate-400">Legacy &amp; Alternate</span>
       </button>
     </div>
   </nav>
 
   <script>
-    // =========================================================================
-    // 90% OFFLINE CORE DATABASE: ALL MARVEL CANON (MCU, NETFLIX, FOX, SONY)
-    // + NON-CANON VAULT WITH EXACT CHRONOLOGICAL COORDINATES
-    // =========================================================================
     const STORAGE_KEY = 'marvel_chroniverse_state_v1';
     const REMOTE_CATALOG_STORAGE_KEY = 'marvel_chroniverse_remote_catalog_v2';
-    const CATALOG_VERSION = '2.0.0-causal-chronology';
+    const CATALOG_VERSION = '2.1.0-production';
     const DEFAULT_GITHUB_REPO = '__GITHUB_REPO_PLACEHOLDER__';
     const CANDIDATE_GITHUB_REPOS = [
       'Shnwnw/MarvelSerie',
@@ -572,6 +421,9 @@
     function getEffectiveToday() {
       const realToday = new Date().toISOString().slice(0, 10);
       return realToday > BASE_BUILD_DATE ? realToday : BASE_BUILD_DATE;
+    }
+    function getCurrentReleaseYear() {
+      return parseInt(getEffectiveToday().slice(0, 4), 10) || 2026;
     }
 
     let BASE_CATALOG = [
@@ -586,8 +438,7 @@
             "chronoEra": "1260 BC – 1896 AD",
             "chronoSort": -1260,
             "isCanon": true,
-            "isNewRelease": true,
-            "earlyTimelineAlert": "Set in 1260 BC — Placed #1 BEFORE Captain America: The First Avenger!",
+            "isNewRelease": false,
             "note": "Follows Hatut Zeraze Wakandan warriors across history recovering vibranium artifacts."
       },
       {
@@ -643,8 +494,7 @@
             "chronoEra": "1964",
             "chronoSort": 1964,
             "isCanon": true,
-            "isNewRelease": true,
-            "earlyTimelineAlert": "Released July 2025 but set in 1964 — Placed near the start of the timeline!",
+            "isNewRelease": false,
             "note": "Marvel’s First Family defends their 1960s retro-futuristic Earth from Galactus and Silver Surfer."
       },
       {
@@ -1568,8 +1418,7 @@
             "chronoEra": "Post-What If...? (2018 Zombie Branch)",
             "chronoSort": 2023.35,
             "isCanon": true,
-            "isNewRelease": true,
-            "earlyTimelineAlert": "Released late 2025 — Placed right after What If...? where the Zombie branch timeline begins!",
+            "isNewRelease": false,
             "note": "Direct continuation of the What If...? Zombie outbreak branch as survivors battle zombified Avengers."
       },
       {
@@ -1933,8 +1782,7 @@
             "chronoEra": "Late 2025",
             "chronoSort": 2025.7,
             "isCanon": true,
-            "isNewRelease": true,
-            "earlyTimelineAlert": "Released June 2025 — Placed in Late 2025 right after Wakanda Forever & Love and Thunder!",
+            "isNewRelease": false,
             "note": "Riri Williams builds her next-generation armor in Chicago and clashes with Parker Robbins / The Hood."
       },
       {
@@ -2532,13 +2380,12 @@
 ];
 
     // =========================================================================
-    // STATE MANAGEMENT + OTA CLOUD CATALOG OVERRIDE
+    // STATE MANAGEMENT + AUTOMATIC OTA CLOUD SYNC
     // =========================================================================
     const appState = {
-      activeTab: 'MAIN',
-      statusMap: {},
-      promotedCanonIds: [],
-      demotedCanonIds: [],
+      activeTab: 'MAIN', // 'MAIN' | 'NONCANON'
+      statusMap: {}, // { [id]: 'DONE' | 'SKIPPED' }
+      promotedCanonIds: [], // Non-canon IDs user chose to Add to Main
       unlockedUpcomingIds: [],
       customReleases: [],
       showNonCanonInMain: false,
@@ -2548,11 +2395,17 @@
       statusFilter: 'ALL',
       typeFilter: 'ALL',
       universeFilter: 'ALL',
-      lastSyncedAt: '2026-11-14 01:55',
-      offlineCachedCount: 0,
+      lastSyncedAt: 'Auto-Synced',
       githubRepoSlug: (DEFAULT_GITHUB_REPO && !DEFAULT_GITHUB_REPO.includes('PLACEHOLDER')) ? DEFAULT_GITHUB_REPO : 'Shnwnw/MarvelSerie',
       catalogVersion: CATALOG_VERSION
     };
+
+    function isUnwatchedNewRelease(item) {
+      const curYear = getCurrentReleaseYear();
+      const st = appState.statusMap[item.id];
+      if (st === 'DONE' || st === 'SKIPPED') return false;
+      return Number(item.releaseYear) >= curYear;
+    }
 
     function loadStateFromStorage() {
       try {
@@ -2566,18 +2419,14 @@
             appState.customReleases = Array.isArray(parsed.customReleases) ? parsed.customReleases : [];
             appState.showNonCanonInMain = Boolean(parsed.showNonCanonInMain);
             appState.radarCollapsed = Boolean(parsed.radarCollapsed);
-            appState.lastSyncedAt = parsed.lastSyncedAt || appState.lastSyncedAt;
-            appState.offlineCachedCount = Number(parsed.offlineCachedCount) || 0;
             if (parsed.githubRepoSlug && !parsed.githubRepoSlug.includes('PLACEHOLDER')) {
               appState.githubRepoSlug = parsed.githubRepoSlug;
             }
           }
         }
-        // If build injected a real repo slug, prefer it
         if (DEFAULT_GITHUB_REPO && !DEFAULT_GITHUB_REPO.includes('PLACEHOLDER')) {
           appState.githubRepoSlug = DEFAULT_GITHUB_REPO;
         }
-        // Load cached OTA remote catalog if newer or updated from GitHub
         const rawRemote = localStorage.getItem(REMOTE_CATALOG_STORAGE_KEY);
         if (rawRemote) {
           const remoteParsed = JSON.parse(rawRemote);
@@ -2606,7 +2455,6 @@
           showNonCanonInMain: appState.showNonCanonInMain,
           radarCollapsed: appState.radarCollapsed,
           lastSyncedAt: appState.lastSyncedAt,
-          offlineCachedCount: appState.offlineCachedCount,
           githubRepoSlug: appState.githubRepoSlug
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -2619,17 +2467,18 @@
     // COMPUTED MERGED CATALOGS & CHRONOLOGICAL NEIGHBOR CALCULATOR
     // =========================================================================
     function getFullCatalog() {
+      const today = getEffectiveToday();
       const unlockedUpcoming = UPCOMING_RELEASES_QUEUE.filter(item =>
-        appState.unlockedUpcomingIds.includes(item.id) || item.releaseDate <= getEffectiveToday()
+        appState.unlockedUpcomingIds.includes(item.id) || item.releaseDate <= today
       );
       const combined = [
         ...BASE_CATALOG.map(item => ({
           ...item,
           isCanon: item.isCanon || appState.promotedCanonIds.includes(item.id),
-          wasPromoted: appState.promotedCanonIds.includes(item.id)
+          wasPromoted: !item.isCanon && appState.promotedCanonIds.includes(item.id)
         })),
-        ...unlockedUpcoming.map(item => ({ ...item, isCanon: true, isNewRelease: true })),
-        ...appState.customReleases.map(item => ({ ...item, isCanon: true, isNewRelease: true }))
+        ...unlockedUpcoming.map(item => ({ ...item, isCanon: true })),
+        ...appState.customReleases.map(item => ({ ...item, isCanon: true }))
       ];
       combined.sort((a, b) => a.chronoSort - b.chronoSort);
       return combined;
@@ -2655,7 +2504,7 @@
 
     function getUniverseBadgeMeta(universe, wasPromoted) {
       if (wasPromoted) {
-        return { label: '✓ CONFIRMED CANON', cls: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' };
+        return { label: '📌 ADDED TO MAIN', cls: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' };
       }
       switch (universe) {
         case 'MCU':
@@ -2690,7 +2539,7 @@
       toastTimer = setTimeout(() => {
         banner.classList.add('hidden');
         banner.classList.remove('flex');
-      }, 3600);
+      }, 3200);
     }
 
     // =========================================================================
@@ -2722,7 +2571,7 @@
     }
 
     // =========================================================================
-    // RENDERING: PROGRESS HUD, NEW RELEASE RADAR, MAIN TIMELINE, NON-CANON, SYNC
+    // RENDERING: PROGRESS HUD, UNWATCHED NEW RELEASES, MAIN TIMELINE, NON-CANON
     // =========================================================================
     function renderApp() {
       const fullCatalog = getFullCatalog();
@@ -2801,41 +2650,49 @@
         page2MergeLabel.textContent = `Show All ${nonCanonItems.length} in Main Timeline: OFF`;
       }
 
-      const newReleases = activeMainPool.filter(i => i.isNewRelease);
-      document.getElementById('newReleaseCountPill').textContent = String(newReleases.length);
+      // 2. Render Unwatched Current-Year New Releases Radar
+      const unwatchedNewReleases = activeMainPool.filter(i => isUnwatchedNewRelease(i));
+      const radarBoxEl = document.getElementById('newReleasesRadarBox');
       const radarListEl = document.getElementById('newReleasesRadarList');
       const collapseBtn = document.getElementById('toggleRadarCollapseBtn');
+      const jumpFirstNewBtn = document.getElementById('jumpToFirstNewBtn');
 
-      if (appState.radarCollapsed) {
-        radarListEl.classList.add('hidden');
-        collapseBtn.textContent = `Show (${newReleases.length})`;
+      if (unwatchedNewReleases.length === 0) {
+        radarBoxEl.classList.add('hidden');
+        if (jumpFirstNewBtn) jumpFirstNewBtn.classList.add('hidden');
       } else {
-        radarListEl.classList.remove('hidden');
-        collapseBtn.textContent = 'Hide';
-        radarListEl.innerHTML = newReleases.map(item => {
-          const isEarly = item.chronoRank <= 15 || item.chronoSort < 2020;
-          const st = appState.statusMap[item.id];
-          const statusIcon = st === 'DONE' ? '✅' : (st === 'SKIPPED' ? '⏭' : '🔥');
-          return `
-            <button type="button" data-jump-id="${item.id}" class="radar-jump-chip text-left px-2.5 py-1.5 rounded-xl border transition flex items-center gap-2 ${
-              isEarly
-                ? 'bg-amber-500/20 hover:bg-amber-500/30 border-amber-400 text-amber-100'
-                : 'bg-marvel-obsidian/90 hover:bg-slate-800 border-marvel-red/50 text-slate-100'
-            }">
-              <span class="font-mono text-xs font-extrabold px-1.5 py-0.5 rounded bg-black/50 text-amber-300">#${item.chronoRank}</span>
-              <div class="min-w-0">
-                <div class="text-xs font-bold truncate flex items-center gap-1">
-                  <span>${statusIcon} ${escapeHtml(item.title)}</span>
+        radarBoxEl.classList.remove('hidden');
+        if (jumpFirstNewBtn) jumpFirstNewBtn.classList.remove('hidden');
+        if (appState.radarCollapsed) {
+          radarListEl.classList.add('hidden');
+          collapseBtn.textContent = `Show (${unwatchedNewReleases.length})`;
+        } else {
+          radarListEl.classList.remove('hidden');
+          collapseBtn.textContent = 'Hide';
+          radarListEl.innerHTML = unwatchedNewReleases.map(item => {
+            const isEarly = item.chronoRank <= 15 || item.chronoSort < 2020;
+            return `
+              <button type="button" data-jump-id="${item.id}" class="radar-jump-chip text-left px-2.5 py-1.5 rounded-xl border transition flex items-center gap-2 ${
+                isEarly
+                  ? 'bg-amber-500/20 hover:bg-amber-500/30 border-amber-400 text-amber-100'
+                  : 'bg-marvel-obsidian/90 hover:bg-slate-800 border-marvel-red/50 text-slate-100'
+              }">
+                <span class="font-mono text-xs font-extrabold px-1.5 py-0.5 rounded bg-black/50 text-amber-300">#${item.chronoRank}</span>
+                <div class="min-w-0">
+                  <div class="text-xs font-bold truncate flex items-center gap-1">
+                    <span>🔥 ${escapeHtml(item.title)}</span>
+                  </div>
+                  <div class="text-[10px] font-mono ${isEarly ? 'text-amber-300 font-bold' : 'text-slate-400'}">
+                    ${isEarly ? '⚠️ EARLY SLOT: ' : 'Chrono: '}${escapeHtml(item.chronoEra)} • ${item.releaseYear}
+                  </div>
                 </div>
-                <div class="text-[10px] font-mono ${isEarly ? 'text-amber-300 font-bold' : 'text-slate-400'}">
-                  ${isEarly ? '⚠️ EARLY SLOT: ' : 'Chrono: '}${escapeHtml(item.chronoEra)} • Released ${item.releaseYear}
-                </div>
-              </div>
-            </button>
-          `;
-        }).join('');
+              </button>
+            `;
+          }).join('');
+        }
       }
 
+      // 3. Filter & Render Main Timeline List
       const q = appState.searchQuery.trim().toLowerCase();
       const filteredMain = activeMainPool.filter(item => {
         if (q) {
@@ -2846,7 +2703,7 @@
         if (appState.statusFilter === 'PENDING' && st !== 'PENDING') return false;
         if (appState.statusFilter === 'DONE' && st !== 'DONE') return false;
         if (appState.statusFilter === 'SKIPPED' && st !== 'SKIPPED') return false;
-        if (appState.statusFilter === 'NEW' && !item.isNewRelease) return false;
+        if (appState.statusFilter === 'NEW' && !isUnwatchedNewRelease(item)) return false;
 
         if (appState.typeFilter !== 'ALL' && item.type !== appState.typeFilter) return false;
         if (appState.universeFilter !== 'ALL' && item.universe !== appState.universeFilter) return false;
@@ -2854,7 +2711,7 @@
       });
 
       document.getElementById('visibleCountReadout').textContent =
-        `Showing ${filteredMain.length} of ${activeMainPool.length} titles in causal chronological order`;
+        `Showing ${filteredMain.length} of ${activeMainPool.length} titles in chronological order`;
 
       const mainListEl = document.getElementById('mainTimelineList');
       if (filteredMain.length === 0) {
@@ -2884,6 +2741,7 @@
         mainListEl.innerHTML = filteredMain.map(item => renderTimelineCard(item, canonItems, false)).join('');
       }
 
+      // 4. Render Page 2: Non-Canon Vault
       const ncQ = appState.nonCanonSearchQuery.trim().toLowerCase();
       const allLegacyNonCanonPool = BASE_CATALOG.filter(i => !i.isCanon).map(item => ({
         ...item,
@@ -2896,7 +2754,7 @@
       });
 
       document.getElementById('nonCanonCountLabel').textContent = `${nonCanonItems.length} Non-Canon Titles`;
-      document.getElementById('promotedCanonCountLabel').textContent = `${appState.promotedCanonIds.length} Confirmed as Canon`;
+      document.getElementById('promotedCanonCountLabel').textContent = `${appState.promotedCanonIds.length} Added to Main`;
       document.getElementById('navCanonSubtitle').textContent = `${activeMainPool.length} Titles (${pct}%)`;
       document.getElementById('navNonCanonSubtitle').textContent = `${nonCanonItems.length} Vault Titles`;
 
@@ -2911,8 +2769,6 @@
         return renderTimelineCard(displayItem, canonItems, true);
       }).join('');
 
-      renderUpcomingSyncQueue();
-
       document.querySelectorAll('.uni-pill').forEach(btn => {
         const u = btn.getAttribute('data-universe');
         if (u === appState.universeFilter) {
@@ -2926,7 +2782,8 @@
     function renderTimelineCard(item, canonItems, isNonCanonPage) {
       const status = appState.statusMap[item.id] || 'PENDING';
       const uniMeta = getUniverseBadgeMeta(item.universe, item.wasPromoted);
-      const isEarlyNewRelease = item.isNewRelease && (item.chronoSort < 2020 || (item.chronoRank && item.chronoRank <= 12));
+      const showNewBadge = isUnwatchedNewRelease(item);
+      const isEarlyNewRelease = showNewBadge && (item.chronoSort < 2020 || (item.chronoRank && item.chronoRank <= 12));
       const neighborNote = (!item.isCanon || item.wasPromoted || isNonCanonPage)
         ? getCanonNeighborDescription(item, canonItems)
         : '';
@@ -2936,7 +2793,7 @@
         cardBorder = 'border-emerald-500/40 bg-emerald-950/20';
       } else if (status === 'SKIPPED') {
         cardBorder = 'border-amber-500/30 bg-slate-900/60 opacity-75';
-      } else if (item.isNewRelease) {
+      } else if (showNewBadge) {
         cardBorder = 'border-amber-500/60 bg-gradient-to-r from-marvel-card via-marvel-card to-amber-950/25 new-release-glow';
       } else if (!item.isCanon) {
         cardBorder = 'border-purple-500/40 bg-purple-950/15';
@@ -2953,7 +2810,7 @@
                   ? 'bg-emerald-500 text-black border-emerald-400'
                   : status === 'SKIPPED'
                   ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
-                  : item.isNewRelease
+                  : showNewBadge
                   ? 'bg-amber-500 text-black border-amber-300'
                   : 'bg-marvel-obsidian text-slate-200 border-marvel-border'
               }">
@@ -2972,7 +2829,7 @@
                   <span class="px-2 py-0.5 rounded text-[10px] font-mono text-slate-300 bg-black/40 border border-white/10">
                     ${typeIcon} ${escapeHtml(item.type)} • ${item.releaseYear}
                   </span>
-                  ${item.isNewRelease ? `
+                  ${showNewBadge ? `
                     <span class="px-2 py-0.5 rounded text-[10px] font-mono font-extrabold bg-gradient-to-r from-marvel-red to-amber-500 text-white shadow">
                       🔥 NEWLY RELEASED
                     </span>
@@ -2992,7 +2849,7 @@
                   ${escapeHtml(item.note)}
                 </p>
 
-                ${item.earlyTimelineAlert && item.isNewRelease ? `
+                ${item.earlyTimelineAlert && showNewBadge ? `
                   <div class="mt-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-[11px] text-amber-200 font-medium flex items-center gap-1.5">
                     <span>🔔</span>
                     <span>${escapeHtml(item.earlyTimelineAlert)}</span>
@@ -3048,51 +2905,13 @@
                       : 'bg-purple-500/20 hover:bg-emerald-500/25 text-purple-200 hover:text-emerald-200 border-purple-500/40'
                   }"
                 >
-                  ${item.wasPromoted ? '✓ Confirmed Canon (Tap to Undo)' : '+ Confirm as Canon'}
+                  ${item.wasPromoted ? '✓ Added to Main (Remove)' : '+ Add to Main'}
                 </button>
               ` : ''}
             </div>
           </div>
         </article>
       `;
-    }
-
-    function renderUpcomingSyncQueue() {
-      const container = document.getElementById('upcomingQueueList');
-      if (!container) return;
-
-      container.innerHTML = UPCOMING_RELEASES_QUEUE.map(item => {
-        const isUnlocked = appState.unlockedUpcomingIds.includes(item.id);
-        return `
-          <div class="p-3 rounded-xl bg-marvel-obsidian border ${isUnlocked ? 'border-emerald-500/50' : 'border-marvel-border'} flex flex-col justify-between gap-2.5">
-            <div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${isUnlocked ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">
-                  ${isUnlocked ? '✓ AUTO-PLACED IN TIMELINE' : 'UPCOMING: ' + item.releaseDate}
-                </span>
-                <span class="text-[10px] font-mono text-slate-400">Chrono: ${escapeHtml(item.chronoEra)}</span>
-              </div>
-              <h4 class="text-sm font-bold text-white mt-1.5">${escapeHtml(item.title)}</h4>
-              <p class="text-[11px] text-slate-400 mt-0.5">${escapeHtml(item.note)}</p>
-            </div>
-            <div class="flex items-center justify-between gap-2 pt-2 border-t border-marvel-border/60">
-              <span class="text-[10px] font-mono text-amber-300 truncate">${escapeHtml(item.earlyTimelineAlert)}</span>
-              <button
-                type="button"
-                data-action="simulate-upcoming"
-                data-id="${item.id}"
-                class="px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 transition ${
-                  isUnlocked
-                    ? 'bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/30'
-                    : 'bg-marvel-red hover:bg-marvel-darkRed text-white'
-                }"
-              >
-                ${isUnlocked ? 'Locate in Timeline' : '⚡ Simulate Release'}
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
     }
 
     // =========================================================================
@@ -3105,28 +2924,25 @@
       } else {
         appState.statusMap[itemId] = targetStatus;
       }
-      saveStateToStorage();
       const today = getEffectiveToday();
-      document.getElementById('currentDateReadout').textContent = today;
       for (const up of UPCOMING_RELEASES_QUEUE) {
         if (up.releaseDate <= today && !appState.unlockedUpcomingIds.includes(up.id)) {
           appState.unlockedUpcomingIds.push(up.id);
         }
       }
-      appState.offlineCachedCount = getFullCatalog().length;
       saveStateToStorage();
       renderApp();
     }
 
-    function togglePromoteToCanon(itemId) {
+    function toggleAddToMain(itemId) {
       const idx = appState.promotedCanonIds.indexOf(itemId);
       const item = BASE_CATALOG.find(i => i.id === itemId);
       if (idx >= 0) {
         appState.promotedCanonIds.splice(idx, 1);
-        showToast(`Reverted "${item ? item.title : itemId}" back to Non-Canon Vault.`, '🌀');
+        showToast(`Removed "${item ? item.title : itemId}" from Main Timeline.`, '🌀');
       } else {
         appState.promotedCanonIds.push(itemId);
-        showToast(`Confirmed "${item ? item.title : itemId}" as Canon! Added to Main Chronological Timeline.`, '🛡️');
+        showToast(`Added "${item ? item.title : itemId}" to your Main Timeline!`, '📌');
       }
       saveStateToStorage();
       renderApp();
@@ -3136,11 +2952,9 @@
       appState.activeTab = tabName;
       const viewMain = document.getElementById('viewMainTimeline');
       const viewNonCanon = document.getElementById('viewNonCanonPage');
-      const viewSync = document.getElementById('viewSyncEnginePage');
 
       viewMain.classList.toggle('hidden', tabName !== 'MAIN');
       viewNonCanon.classList.toggle('hidden', tabName !== 'NONCANON');
-      viewSync.classList.toggle('hidden', tabName !== 'SYNC');
 
       document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
         const t = btn.getAttribute('data-tab');
@@ -3154,9 +2968,7 @@
     }
 
     // =========================================================================
-    // LIVE GITHUB OVER-THE-AIR (OTA) DATA SYNC ENGINE
-    // Fetches www/catalog.json (or www/index.html) directly from GitHub so you
-    // never need to rebuild or reinstall the APK when updating the timeline!
+    // AUTOMATIC BACKGROUND & ONE-TAP GITHUB OTA SYNC ENGINE
     // =========================================================================
     async function fetchRemoteCatalogFromGitHub() {
       const ts = Date.now();
@@ -3172,9 +2984,6 @@
         urlsToTry.push(`https://raw.githubusercontent.com/${repo}/main/www/catalog.json?t=${ts}`);
         urlsToTry.push(`https://raw.githubusercontent.com/${repo}/master/www/catalog.json?t=${ts}`);
         urlsToTry.push(`https://cdn.jsdelivr.net/gh/${repo}@main/www/catalog.json?t=${ts}`);
-      }
-
-      for (const repo of candidateRepos) {
         urlsToTry.push(`https://raw.githubusercontent.com/${repo}/main/www/index.html?t=${ts}`);
         urlsToTry.push(`https://raw.githubusercontent.com/${repo}/master/www/index.html?t=${ts}`);
       }
@@ -3226,70 +3035,29 @@
       return { synced: false };
     }
 
-    async function runTenPercentLiveSync(silent = false) {
-      const statusText = document.getElementById('syncEngineStatusText');
+    async function runLiveSync(silent = true) {
       const syncIcon = document.getElementById('syncIcon');
-      if (statusText) statusText.textContent = 'SYNCING LIVE CATALOG...';
       if (syncIcon) syncIcon.classList.add('animate-spin');
 
       const otaResult = await fetchRemoteCatalogFromGitHub();
 
-      let liveWikiVerified = otaResult.synced;
-      if (!liveWikiVerified) {
-        try {
-          const resp = await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/Marvel_Cinematic_Universe:_Phase_Six', {
-            method: 'GET',
-            headers: { 'Accept': 'application/json' }
-          });
-          if (resp.ok) {
-            liveWikiVerified = true;
-          }
-        } catch (err) {
-          // Offline mode fallback
-        }
-      }
-
       const today = getEffectiveToday();
-      let newlyUnlockedCount = 0;
       for (const up of UPCOMING_RELEASES_QUEUE) {
         if (up.releaseDate <= today && !appState.unlockedUpcomingIds.includes(up.id)) {
           appState.unlockedUpcomingIds.push(up.id);
-          newlyUnlockedCount++;
         }
       }
 
-      const fullNow = getFullCatalog();
-      appState.offlineCachedCount = fullNow.length;
-
-      const nowStamp = today + ' ' + new Date().toTimeString().slice(0, 5);
-      appState.lastSyncedAt = nowStamp;
-      document.getElementById('lastSyncTimestamp').textContent =
-        otaResult.synced
-          ? `Live GitHub OTA Synced (${fullNow.length} titles)`
-          : liveWikiVerified
-          ? `Synced & Saved Offline (${fullNow.length} titles)`
-          : `Offline Cache Ready (${fullNow.length} titles)`;
-
-      if (statusText) {
-        statusText.textContent = otaResult.synced
-          ? `GITHUB OTA LIVE (${fullNow.length})`
-          : liveWikiVerified
-          ? `SYNCED & CACHED OFFLINE (${fullNow.length})`
-          : `OFFLINE CACHE ACTIVE (${fullNow.length})`;
+      const tsEl = document.getElementById('lastSyncTimestamp');
+      if (tsEl) {
+        tsEl.textContent = otaResult.synced ? 'Synced • Up to Date' : 'Up to Date';
       }
       if (syncIcon) syncIcon.classList.remove('animate-spin');
 
       saveStateToStorage();
       renderApp();
       if (!silent) {
-        showToast(
-          otaResult.synced
-            ? `Live GitHub Sync complete! Timeline & order updated (${fullNow.length} titles) with your progress preserved.`
-            : liveWikiVerified
-            ? `Synced! All ${fullNow.length} titles are saved locally for offline viewing.`
-            : `Offline cache active! All ${fullNow.length} titles are stored on your device.`,
-          '📡'
-        );
+        showToast('Timeline synced and up to date!', '⚡');
       }
     }
 
@@ -3302,34 +3070,13 @@
     }
 
     // =========================================================================
-    // INITIALIZE EVENT LISTENERS
+    // INITIALIZE EVENT LISTENERS & AUTO-SYNC TRIGGERS
     // =========================================================================
     function initApp() {
       loadStateFromStorage();
 
       document.getElementById('headerSyncBtn').addEventListener('click', () => {
-        switchTab('SYNC');
-        runTenPercentLiveSync(false);
-      });
-
-      const repoInputEl = document.getElementById('githubRepoSlugInput');
-      const verBadgeEl = document.getElementById('otaCatalogVersionBadge');
-      if (repoInputEl) repoInputEl.value = appState.githubRepoSlug;
-      if (verBadgeEl) verBadgeEl.textContent = appState.catalogVersion;
-      const saveRepoBtn = document.getElementById('saveGithubRepoBtn');
-      if (saveRepoBtn && repoInputEl) {
-        saveRepoBtn.addEventListener('click', () => {
-          const val = repoInputEl.value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/+$/, '');
-          if (val) {
-            appState.githubRepoSlug = val;
-            saveStateToStorage();
-            runTenPercentLiveSync(false);
-          }
-        });
-      }
-
-      document.getElementById('runLiveSyncNowBtn').addEventListener('click', () => {
-        runTenPercentLiveSync(false);
+        runLiveSync(false);
       });
 
       const resetModal = document.getElementById('resetModal');
@@ -3363,7 +3110,7 @@
         showToast(
           appState.showNonCanonInMain
             ? 'Non-Canon movies & series are now shown in their chronological places on the Main Page!'
-            : 'Main Page set to Canon Only.',
+            : 'Main Page set to Canon Timeline.',
           '🌀'
         );
       };
@@ -3422,7 +3169,7 @@
 
       document.getElementById('jumpToFirstNewBtn').addEventListener('click', () => {
         const pool = getFullCatalog().filter(i => i.isCanon || appState.showNonCanonInMain);
-        const firstNew = pool.find(i => i.isNewRelease);
+        const firstNew = pool.find(i => isUnwatchedNewRelease(i));
         if (firstNew) jumpToItemInTimeline(firstNew.id);
       });
 
@@ -3444,68 +3191,11 @@
         } else if (action === 'toggle-skip') {
           setItemStatus(id, 'SKIPPED');
         } else if (action === 'toggle-canon') {
-          togglePromoteToCanon(id);
+          toggleAddToMain(id);
         }
       };
       document.getElementById('mainTimelineList').addEventListener('click', handleCardAction);
       document.getElementById('nonCanonTimelineList').addEventListener('click', handleCardAction);
-
-      document.getElementById('upcomingQueueList').addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-action="simulate-upcoming"]');
-        if (!btn) return;
-        const id = btn.getAttribute('data-id');
-        const item = UPCOMING_RELEASES_QUEUE.find(i => i.id === id);
-        if (!item) return;
-
-        if (!appState.unlockedUpcomingIds.includes(id)) {
-          appState.unlockedUpcomingIds.push(id);
-          saveStateToStorage();
-          renderApp();
-          showToast(`Auto-Released "${item.title}" into its chronological slot (${item.chronoEra})!`, '🔥');
-        }
-        jumpToItemInTimeline(id);
-      });
-
-      document.getElementById('customReleaseForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const titleEl = document.getElementById('customTitleInput');
-        const yearEl = document.getElementById('customChronoYearInput');
-        const typeEl = document.getElementById('customTypeInput');
-        const uniEl = document.getElementById('customUniverseInput');
-
-        const title = titleEl.value.trim();
-        const chronoYear = parseFloat(yearEl.value);
-        if (!title || isNaN(chronoYear)) return;
-
-        const newId = 'custom-' + Date.now();
-        const isBeforeFirst = chronoYear < 1942;
-        const eraLabel = chronoYear < 0 ? `${Math.abs(chronoYear)} BC` : String(Math.floor(chronoYear));
-
-        const newEntry = {
-          id: newId,
-          title: title,
-          type: typeEl.value,
-          universe: uniEl.value,
-          earth: 'Custom Canon Release',
-          releaseDate: getEffectiveToday(),
-          releaseYear: 2026,
-          chronoEra: eraLabel,
-          chronoSort: chronoYear,
-          isCanon: true,
-          isNewRelease: true,
-          earlyTimelineAlert: isBeforeFirst
-            ? `⚠️ NEW RELEASE BEFORE FIRST MOVIE EVER: Set in ${eraLabel} — Placed at the top of the timeline!`
-            : `NEW RELEASE: Auto-placed in ${eraLabel} chronological slot!`,
-          note: `Newly released ${typeEl.value.toLowerCase()} automatically inserted into chronological year ${eraLabel}.`
-        };
-
-        appState.customReleases.push(newEntry);
-        saveStateToStorage();
-        titleEl.value = '';
-        renderApp();
-        showToast(`Released "${title}" & placed in ${eraLabel}!`, '🔥');
-        jumpToItemInTimeline(newId);
-      });
 
       document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -3515,12 +3205,18 @@
       });
 
       renderApp();
-      // Automatically pull latest catalog from GitHub in the background on app launch
-      runTenPercentLiveSync(true);
+
+      // Automatic background sync on app launch, when returning to foreground, and when coming online
+      runLiveSync(true);
+      window.addEventListener('online', () => runLiveSync(true));
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          runLiveSync(true);
+        }
+      });
     }
 
     window.addEventListener('DOMContentLoaded', initApp);
-
   </script>
 </body>
 </html>

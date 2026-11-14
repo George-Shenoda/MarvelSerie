@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-causal-chronology",
+  "version": "2.1.0-production",
   "updatedAt": "2026-11-14",
   "baseCatalog": [
     {
@@ -13,8 +13,7 @@
       "chronoEra": "1260 BC – 1896 AD",
       "chronoSort": -1260,
       "isCanon": true,
-      "isNewRelease": true,
-      "earlyTimelineAlert": "Set in 1260 BC — Placed #1 BEFORE Captain America: The First Avenger!",
+      "isNewRelease": false,
       "note": "Follows Hatut Zeraze Wakandan warriors across history recovering vibranium artifacts."
     },
     {
@@ -70,8 +69,7 @@
       "chronoEra": "1964",
       "chronoSort": 1964,
       "isCanon": true,
-      "isNewRelease": true,
-      "earlyTimelineAlert": "Released July 2025 but set in 1964 — Placed near the start of the timeline!",
+      "isNewRelease": false,
       "note": "Marvel’s First Family defends their 1960s retro-futuristic Earth from Galactus and Silver Surfer."
     },
     {
@@ -995,8 +993,7 @@
       "chronoEra": "Post-What If...? (2018 Zombie Branch)",
       "chronoSort": 2023.35,
       "isCanon": true,
-      "isNewRelease": true,
-      "earlyTimelineAlert": "Released late 2025 — Placed right after What If...? where the Zombie branch timeline begins!",
+      "isNewRelease": false,
       "note": "Direct continuation of the What If...? Zombie outbreak branch as survivors battle zombified Avengers."
     },
     {
@@ -1360,8 +1357,7 @@
       "chronoEra": "Late 2025",
       "chronoSort": 2025.7,
       "isCanon": true,
-      "isNewRelease": true,
-      "earlyTimelineAlert": "Released June 2025 — Placed in Late 2025 right after Wakanda Forever & Love and Thunder!",
+      "isNewRelease": false,
       "note": "Riri Williams builds her next-generation armor in Chicago and clashes with Parker Robbins / The Hood."
     },
     {
