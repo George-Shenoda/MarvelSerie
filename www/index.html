@@ -109,6 +109,10 @@
       </div>
 
       <div class="flex items-center gap-1.5 shrink-0">
+                <button id="iosInstallHeaderBtn" type="button" class="hidden px-2.5 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 active:scale-95 text-cyan-300 border border-cyan-500/30 text-xs font-semibold items-center gap-1 transition" title="Install App on iPhone Home Screen">
+          <span>📲</span>
+          <span>Install on iPhone</span>
+        </button>
         <button id="headerSyncBtn" type="button" class="px-2.5 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 active:scale-95 text-amber-300 border border-amber-500/30 text-xs font-semibold flex items-center gap-1.5 transition" title="Sync latest timeline updates">
           <svg class="w-3.5 h-3.5" id="syncIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -374,6 +378,42 @@
         <button id="confirmResetModalBtn" type="button" class="px-4 py-2 rounded-xl bg-marvel-red hover:bg-marvel-darkRed text-white text-xs font-bold shadow-lg transition">
           Yes, Reset Watchlist to 0%
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- iOS DIRECT INSTALL MODAL (NO SIDELOADLY / NO PC REQUIRED) -->
+  <div id="iosInstallModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div class="w-full max-w-md rounded-2xl bg-marvel-panel border border-cyan-500/40 p-5 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-marvel-red flex items-center justify-center text-white font-display text-lg shadow">
+            📲
+          </div>
+          <div>
+            <h3 class="font-display text-2xl tracking-wide text-white">INSTALL ON IPHONE (NO PC)</h3>
+            <p class="text-xs text-cyan-300">Works fullscreen forever • Never expires after 7 days</p>
+          </div>
+        </div>
+        <button id="closeIosInstallModalBtn" type="button" class="text-slate-400 hover:text-white text-sm font-bold px-2 py-1">✕</button>
+      </div>
+
+      <div class="space-y-2.5 text-xs text-slate-200">
+        <div class="p-3 rounded-xl bg-marvel-obsidian border border-marvel-border space-y-1.5">
+          <div class="font-bold text-amber-300">Method 1: Instant Safari Install (2 Taps — Recommended)</div>
+          <ol class="list-decimal list-inside space-y-1 text-slate-300">
+            <li>Tap the <strong>Share</strong> icon (<span class="text-cyan-300 font-bold">⬆️</span>) at the bottom of Safari.</li>
+            <li>Scroll down and tap <strong>"Add to Home Screen" (إضافة إلى الشاشة الرئيسية)</strong>, then tap <strong>Add</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="p-3 rounded-xl bg-marvel-obsidian border border-cyan-500/30 space-y-2">
+          <div class="font-bold text-cyan-300">Method 2: Direct iOS Profile File (.mobileconfig)</div>
+          <p class="text-slate-300">Download the signed iOS WebClip profile and tap <strong>Install</strong> in iPhone Settings → Profile Downloaded:</p>
+          <button id="downloadMobileConfigBtn" type="button" class="inline-flex items-center justify-center w-full px-3 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition">
+            ⬇️ Download iPhone App Profile (.mobileconfig)
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -3216,7 +3256,80 @@
       });
     }
 
-    window.addEventListener('DOMContentLoaded', initApp);
+    window.addEventListener('DOMContentLoaded', () => { initApp(); 
+      // iOS Native Standalone Detection & Service Worker Registration
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      const iosBtn = document.getElementById('iosInstallHeaderBtn');
+      const iosModal = document.getElementById('iosInstallModal');
+      const closeIosBtn = document.getElementById('closeIosInstallModalBtn');
+      if (iosBtn && isIOS && !isStandalone) {
+        iosBtn.classList.remove('hidden');
+        iosBtn.classList.add('flex');
+      }
+      if (iosBtn && iosModal && closeIosBtn) {
+        iosBtn.addEventListener('click', () => {
+          iosModal.classList.remove('hidden');
+          iosModal.classList.add('flex');
+        });
+        closeIosBtn.addEventListener('click', () => {
+          iosModal.classList.add('hidden');
+          iosModal.classList.remove('flex');
+        });
+        const dlProfileBtn = document.getElementById('downloadMobileConfigBtn');
+        if (dlProfileBtn) {
+          dlProfileBtn.addEventListener('click', () => {
+            const touchIconEl = document.querySelector('link[rel="apple-touch-icon"]');
+            const iconB64 = touchIconEl ? touchIconEl.href.replace(/^data:image\/png;base64,/, '') : '';
+            const appUrl = (location.protocol.startsWith('http')) ? location.href.split('#')[0] : ('https://' + appState.githubRepoSlug.split('/')[0].toLowerCase() + '.github.io/' + (appState.githubRepoSlug.split('/')[1] || 'MarvelSerie') + '/');
+            const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>FullScreen</key><true/>
+      <key>Icon</key><data>${iconB64}</data>
+      <key>IgnoreManifestScope</key><true/>
+      <key>IsRemovable</key><true/>
+      <key>Label</key><string>Chroniverse</string>
+      <key>PayloadDescription</key><string>Installs Marvel Chroniverse as a Fullscreen App on iPhone</string>
+      <key>PayloadDisplayName</key><string>Marvel Chroniverse App</string>
+      <key>PayloadIdentifier</key><string>com.marvel.chroniverse.webclip</string>
+      <key>PayloadType</key><string>com.apple.webClip.managed</string>
+      <key>PayloadUUID</key><string>8A9C7E12-4B5D-4E2A-9F11-3C5D7A8E9B01</string>
+      <key>PayloadVersion</key><integer>1</integer>
+      <key>Precomposed</key><true/>
+      <key>URL</key><string>${appUrl}</string>
+    </dict>
+  </array>
+  <key>PayloadDescription</key><string>Installs Marvel Chroniverse directly onto your iPhone Home Screen in Fullscreen Mode.</string>
+  <key>PayloadDisplayName</key><string>Marvel Chroniverse iOS Installer</string>
+  <key>PayloadIdentifier</key><string>com.marvel.chroniverse.installer</string>
+  <key>PayloadOrganization</key><string>Marvel Chroniverse</string>
+  <key>PayloadRemovalDisallowed</key><false/>
+  <key>PayloadType</key><string>Configuration</string>
+  <key>PayloadUUID</key><string>1F2E3D4C-5B6A-4789-8A0B-1C2D3E4F5A6B</string>
+  <key>PayloadVersion</key><integer>1</integer>
+</dict>
+</plist>`;
+            const blob = new Blob([xml], { type: 'application/x-apple-aspen-config' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'MarvelChroniverse-iPhone.mobileconfig';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 3000);
+          });
+        }
+      }
+      if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      }
+ });
   </script>
 </body>
 </html>

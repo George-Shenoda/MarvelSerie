@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>FullScreen</key>
+      <true/>
+      <key>Icon</key>
+      <data>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</data>
+      <key>IgnoreManifestScope</key>
+      <true/>
+      <key>IsRemovable</key>
+      <true/>
+      <key>Label</key>
+      <string>Chroniverse</string>
+      <key>PayloadDescription</key>
+      <string>Installs Marvel Chroniverse Tracker as a Fullscreen Native WebApp on iPhone</string>
+      <key>PayloadDisplayName</key>
+      <string>Marvel Chroniverse App</string>
+      <key>PayloadIdentifier</key>
+      <string>com.marvel.chroniverse.webclip</string>
+      <key>PayloadType</key>
+      <string>com.apple.webClip.managed</string>
+      <key>PayloadUUID</key>
+      <string>8A9C7E12-4B5D-4E2A-9F11-3C5D7A8E9B01</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>Precomposed</key>
+      <true/>
+      <key>URL</key>
+      <string>__IOS_WEBAPP_URL__</string>
+    </dict>
+  </array>
+  <key>PayloadDescription</key>
+  <string>Installs Marvel Chroniverse Tracker directly onto your iPhone Home Screen in Fullscreen Mode (no Sideloadly or PC needed).</string>
+  <key>PayloadDisplayName</key>
+  <string>Marvel Chroniverse iOS Installer</string>
+  <key>PayloadIdentifier</key>
+  <string>com.marvel.chroniverse.installer</string>
+  <key>PayloadOrganization</key>
+  <string>Marvel Chroniverse</string>
+  <key>PayloadRemovalDisallowed</key>
+  <false/>
+  <key>PayloadType</key>
+  <string>Configuration</string>
+  <key>PayloadUUID</key>
+  <string>1F2E3D4C-5B6A-4789-8A0B-1C2D3E4F5A6B</string>
+  <key>PayloadVersion</key>
+  <integer>1</integer>
+</dict>
+</plist>
